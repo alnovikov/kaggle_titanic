@@ -3,7 +3,7 @@
 Author - Alex Novikov
 
 The goal of the code is to load in Titanic data from Kaggle,
-prepare it and run 3 algorithms - Naive Bayes, SVM and Random Forests.
+prepare it and run a ML algorithms - Naive Bayes, SVM or Random Forests.
 
 Variables :
 VARIABLE DESCRIPTIONS:
@@ -92,9 +92,7 @@ df_features_test = df2[["Pclass","Gender","Fare", "Age"]]
 print df2[["Pclass","Gender","SibSp","Parch","Fare", "Age"]].info()
 features_test= np.array(df_features_test.values)
 
-
-
-# Try out Random forests
+# Try out Random Forests
 
 from sklearn.ensemble import RandomForestClassifier
 clf = RandomForestClassifier(n_estimators=8, criterion="gini", oob_score=False)
@@ -104,17 +102,10 @@ clf = clf.fit(features_train, labels_train)
 print "...and  training time is ", round(time()-t, 3), "s"
 predictions = clf.predict(features_test)
 
-
-
 # output results
 result = np.c_[df2.ix[:,0].astype(int), predictions.astype(int)]
 df_result = pd.DataFrame(result[:,0:2], columns=['PassengerId', 'Survived'])
 
-df_result.to_csv(dir_path + 'titanic_results3.csv', index=False)
-
-
-
-
+df_result.to_csv(dir_path + 'titanic_results.csv', index=False)
 
 # TODO  do some analysis on cabin location... (proximity calculation?)
-
